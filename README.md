@@ -1,35 +1,35 @@
-# Mito-Aberrant-Peptide-Predictor
+# MitoAberrantPeptidePredictor
 
 ## Overview
 
-MitoAberrantPeptidePredictor is an in silico mitochondrial translation simulator designed to model abnormal translation events that may occur under altered tRNA modification conditions.
+MitoAberrantPeptidePredictor is an in silico mitochondrial translation simulator designed to model abnormal translation events under altered translation conditions.
 
-The project was inspired by ongoing research on TRIT1 knockout cells and the potential effects of defective tRNA modifications on mitochondrial translation fidelity.
+The tool predicts how translation outcomes may change when specific codons trigger simulated ribosomal frameshift events during mitochondrial translation, generating alternative peptide products that may not exist under standard conditions.
 
-The tool predicts how translation outcomes may change when specific codons trigger ribosomal frameshift events during mitochondrial translation, generating alternative peptide products that may not exist under normal conditions.
+The software compares canonical and altered translation products and identifies peptide regions generated specifically after translation disruptions.
 
-These aberrant peptides may potentially become a source of non-canonical antigens and contribute to peptide presentation observed in immunopeptidomics experiments.
+This project aims to provide a computational framework for exploring how changes in translation behavior can influence protein products and potentially generate novel peptide sequences.
 
 ---
 
 ## Biological Motivation
 
-Transfer RNA (tRNA) modifications are critical for maintaining translation fidelity and proper decoding of codons.
+Transfer RNA (tRNA) modifications play an important role in maintaining translation fidelity and proper decoding of codons.
 
-TRIT1 (tRNA Isopentenyltransferase 1) introduces the i6A (N6-isopentenyladenosine) modification into specific tRNAs. This modification improves decoding efficiency and translational accuracy.
+These modifications can influence translation efficiency, ribosome movement, codon recognition, and overall protein synthesis. Disruption of translation-associated pathways has been associated with altered translation dynamics and generation of unexpected translation products.
 
-TRIT1 deficiency has been associated with mitochondrial dysfunction and altered mitochondrial tRNA biology.
+Abnormal translation events, including altered decoding and frameshifting, may generate peptide sequences that differ from canonical proteins.
 
-The broader goal of our research is to understand whether disruption of TRIT1 activity may contribute to abnormal translation events that generate aberrant peptide sequences.
+Such peptide products are of interest because they may:
 
-Such peptides could potentially:
-
-- Alter mitochondrial protein synthesis
-- Affect respiratory complex function
+- Alter protein synthesis
+- Affect cellular function
 - Generate non-canonical peptide products
-- Contribute to immunopeptidome diversity
+- Contribute to peptide diversity detected in immunopeptidomics studies
 
-This project creates a computational framework to investigate this hypothesis.
+Understanding how changes in translation behavior influence peptide generation remains an active area of research.
+
+This project creates a computational framework to explore hypothetical translation abnormalities and investigate their potential consequences.
 
 ---
 
@@ -37,9 +37,9 @@ This project creates a computational framework to investigate this hypothesis.
 
 The purpose of this project is to simulate mitochondrial translation and artificially introduce frameshift events at user-defined codons.
 
-The initial version focuses on serine-associated codons because of their biological relevance to ongoing TRIT1-related studies.
+The software compares standard translation with altered translation conditions and identifies peptide regions generated exclusively after simulated translation disruptions.
 
-The software compares normal translation to altered translation and identifies peptide regions generated exclusively after frameshift events.
+Initially, the project focuses on mitochondrial coding sequences and provides a flexible framework for testing different translation scenarios.
 
 ---
 
@@ -58,7 +58,7 @@ Example:
 ATGATATGATTTGCTGCTGCTGCTGCTTAA
 ```
 
-### 2. Frameshift trigger codon
+### 2. Trigger codon
 
 A codon specified by the user:
 
@@ -66,14 +66,14 @@ A codon specified by the user:
 UCU
 ```
 
-When the simulated ribosome encounters this codon, a programmed frameshift event may occur.
+When the simulated ribosome encounters this codon, a frameshift event can be introduced.
 
-### Optional future parameters
+### Optional parameters
 
 - Frameshift direction (+1 or -1)
 - Number of allowed frameshifts
+- Translation position
 - Frameshift probability
-- Specific translation positions
 - Output peptide length threshold
 
 ---
@@ -85,13 +85,13 @@ The tool generates:
 ### Wild-type translation
 
 ```text
-MFLASV...
+MMWF...
 ```
 
 ### Altered translation
 
 ```text
-MFLSGWP...
+MMWSGLL...
 ```
 
 ### Frameshift report
@@ -106,14 +106,14 @@ Shift: +1
 
 ### Candidate aberrant peptides
 
-Peptide sequences appearing only in the altered translation:
+Peptide sequences generated only after altered translation:
 
 ```text
 SGWPKLV
 AFGTRVL
 ```
 
-These peptides may represent potential candidates for future immunopeptidomics analyses.
+These peptides may represent candidate sequences for downstream analyses.
 
 ---
 
@@ -121,14 +121,14 @@ These peptides may represent potential candidates for future immunopeptidomics a
 
 Future versions may include:
 
-- Support for additional codons
-- Automatic comparison of WT vs KO translation
+- Support for multiple codons simultaneously
+- Adjustable frameshift probability
 - Codon usage analysis
-- Visualization of frameshift locations
-- Peptide window generation for immunopeptidomics workflows
+- Visualization of translation disruption events
+- Prediction of candidate peptide regions
 - CSV export
 - Graphical interface
-- Integration with mass spectrometry candidate analysis
+- Integration with downstream peptide analysis workflows
 
 ---
 
@@ -140,7 +140,7 @@ Clone repository:
 git clone https://github.com/shirshance/MitoAberrantPeptidePredictor.git
 ```
 
-Move into project directory:
+Move into the project directory:
 
 ```bash
 cd MitoAberrantPeptidePredictor
@@ -195,15 +195,15 @@ MitoAberrantPeptidePredictor/
 
 Input:
 
-FASTA sequence → mitochondrial coding sequence
+FASTA sequence
 
 ↓
 
-Translate using mitochondrial codon table
+Mitochondrial translation
 
 ↓
 
-Introduce frameshift event at selected codon
+Introduce simulated frameshift event
 
 ↓
 
@@ -211,11 +211,11 @@ Generate altered protein sequence
 
 ↓
 
-Identify novel peptide regions
+Compare with wild-type translation
 
 ↓
 
-Predict candidate aberrant peptides
+Identify novel peptide regions
 
 ---
 
@@ -223,4 +223,4 @@ Predict candidate aberrant peptides
 
 This project was developed as part of a Python programming course project.
 
-The biological inspiration comes from ongoing studies investigating TRIT1 function, mitochondrial translation fidelity, and generation of potentially novel peptide products.
+The project combines computational biology and simulation approaches to investigate how altered translation behavior may affect protein products and generate novel peptide sequences.
