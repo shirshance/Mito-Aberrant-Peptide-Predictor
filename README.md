@@ -221,6 +221,6 @@ Identify novel peptide regions
 
 ## Course Information
 
-This project was developed as part of a Python programming course project.
+This project was developed as part of a Python programming course project https://github.com/Code-Maven/wis-python-course-2026-03
 
 The project combines computational biology and simulation approaches to investigate how altered translation behavior may affect protein products and generate novel peptide sequences.
