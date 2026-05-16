@@ -111,22 +111,7 @@ SGWPKLV
 AFGTRVL
 ```
 
-These peptides may represent candidate sequences for downstream analyses.
-
----
-
-## Planned Features
-
-Future versions may include:
-
-- Support for multiple codons simultaneously
-- Adjustable frameshift probability
-- Codon usage analysis
-- Visualization of translation disruption events
-- Prediction of candidate peptide regions
-- CSV export
-- Graphical interface
-- Integration with downstream peptide analysis workflows
+The predicted peptide products may ultimately be used to generate a custom peptide database for comparison with mass spectrometry datasets, enabling the search for experimentally detected translation-derived peptide candidates.
 
 ---
 
@@ -178,9 +163,9 @@ pytest
 ```text
 MitoAberrantPeptidePredictor/
 
-├── mt_translation.py
-├── translation_lib.py
-├── test_translation.py
+├── mt_translation.py        # Main program workflow
+├── mt_codon_table.py        # Human mitochondrial genetic code
+├── test_translation.py      # Unit tests
 ├── requirements.txt
 ├── example_data/
 │   └── MT-ND1.fasta
