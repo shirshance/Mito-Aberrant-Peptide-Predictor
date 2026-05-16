@@ -174,33 +174,7 @@ MitoAberrantPeptidePredictor/
 
 ---
 
-## Example Workflow
 
-Input:
-
-FASTA sequence
-
-↓
-
-Mitochondrial translation
-
-↓
-
-Introduce simulated frameshift event
-
-↓
-
-Generate altered protein sequence
-
-↓
-
-Compare with wild-type translation
-
-↓
-
-Identify novel peptide regions
-
----
 
 ## Course Information
 
