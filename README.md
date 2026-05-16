@@ -2,13 +2,13 @@
 
 ## Overview
 
-MitoAberrantPeptidePredictor is an in silico mitochondrial translation simulator designed to model abnormal translation events under altered translation conditions.
+MitoAberrantPeptidePredictor is an in silico mitochondrial translation simulator designed to model abnormal translation events occurring during mitochondrial protein synthesis.
 
-The tool predicts how translation outcomes may change when specific codons trigger simulated ribosomal frameshift events during mitochondrial translation, generating alternative peptide products that may not exist under standard conditions.
+Mitochondria contain their own translation machinery, including a specialized set of mitochondrial transfer RNAs (mt-tRNAs) and a distinct genetic code used to translate the 13 mitochondrially encoded proteins.
 
-The software compares canonical and altered translation products and identifies peptide regions generated specifically after translation disruptions.
+Transfer RNA modifications are critical for accurate codon decoding and translation fidelity. Alterations in these processes may affect ribosome behavior and potentially generate unexpected translation products.
 
-This project aims to provide a computational framework for exploring how changes in translation behavior can influence protein products and potentially generate novel peptide sequences.
+This tool predicts how mitochondrial translation outcomes may change when specific codons trigger simulated ribosomal frameshift events, generating alternative peptide products that may not exist under normal conditions.
 
 ---
 
@@ -28,8 +28,6 @@ Such peptide products are of interest because they may:
 - Contribute to peptide diversity detected in immunopeptidomics studies
 
 Understanding how changes in translation behavior influence peptide generation remains an active area of research.
-
-This project creates a computational framework to explore hypothetical translation abnormalities and investigate their potential consequences.
 
 ---
 
