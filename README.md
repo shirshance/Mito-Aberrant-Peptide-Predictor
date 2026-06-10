@@ -47,7 +47,7 @@ The program expects:
 
 ### 1. FASTA sequence
 
-A nucleotide FASTA file corresponding to one of the 13 mitochondrial protein-coding genes.
+A nucleotide FASTA file corresponding to one of the 13 mitochondrial protein-coding genes (or all of them. Mice or Human).
 
 Example:
 
