@@ -6,7 +6,7 @@ MitoAberrantPeptidePredictor is an in silico mitochondrial translation simulator
 
 Mitochondria contain their own translation machinery, including a specialized set of mitochondrial transfer RNAs (mt-tRNAs) and a distinct genetic code used to translate the 13 mitochondrially encoded proteins.
 
-Transfer RNA modifications are critical for accurate codon decoding and translation fidelity. Alterations in these processes may affect ribosome behavior and potentially generate unexpected translation products.
+Transfer RNA (tRNA) modifications are critical for accurate codon decoding and translation fidelity. Alterations in these processes may affect ribosome behavior and potentially generate unexpected translation products.
 
 This tool predicts how mitochondrial translation outcomes may change when specific codons trigger simulated ribosomal frameshift events, generating alternative peptide products that may not exist under normal conditions.
 
