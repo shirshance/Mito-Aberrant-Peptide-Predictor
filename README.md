@@ -83,13 +83,14 @@ The tool generates:
 ### Wild-type translation
 
 ```text
-MMWF...
+KKKKWFKFGPF
+
 ```
 
 ### Altered translation
 
 ```text
-MMWSGLL...
+KKKKDLNLGP
 ```
 
 ### Frameshift report
@@ -98,7 +99,7 @@ MMWSGLL...
 Frameshift event detected
 
 Position: 21
-Codon: UCU
+Codon: TCT
 Shift: +1
 ```
 
