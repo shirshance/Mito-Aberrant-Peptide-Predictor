@@ -144,7 +144,7 @@ Example:
 ```bash
 python mt_translation.py \
 -f MT-ND1.fasta \
--c UCU \
+-c TCT \
 -shift +1
 ```
 
