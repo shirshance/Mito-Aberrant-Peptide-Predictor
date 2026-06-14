@@ -61,7 +61,7 @@ ATGATATGATTTGCTGCTGCTGCTGCTTAA
 A codon specified by the user:
 
 ```text
-UCU
+TCT
 ```
 
 When the simulated ribosome encounters this codon, a frameshift event can be introduced.
