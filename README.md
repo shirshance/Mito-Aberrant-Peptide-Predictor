@@ -110,8 +110,17 @@ SGWPKLV
 AFGTRVL
 ```
 
-The predicted peptide products may ultimately be used to generate a custom peptide database for comparison with mass spectrometry datasets, enabling the search for experimentally detected translation-derived peptide candidates.
+### Optional FASTA output
 
+When the -o argument is provided, the program writes all candidate aberrant peptides to a FASTA file:
+
+>aberrant_peptide_1
+SGWPKLV
+
+>aberrant_peptide_2
+AFGTRVL
+
+This FASTA file can be used as a custom peptide database for downstream proteomics and immunopeptidomics analyses, including database searches against mass spectrometry datasets.
 ---
 
 ## Installation
