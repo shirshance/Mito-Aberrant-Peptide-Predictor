@@ -52,7 +52,7 @@ A nucleotide FASTA file corresponding to mitochondrial protein-coding genes. Mit
 Example:
 
 ```fasta
->Mitochondrial_gene_COX1
+>Mitochondrial_gene
 ATGATATGATTTGCTGCTGCTGCTGCTTAA
 ```
 
