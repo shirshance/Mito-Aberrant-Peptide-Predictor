@@ -112,7 +112,8 @@ AFGTRVL
 
 ### Optional FASTA output
 
-When the -o argument is provided, the program writes all candidate aberrant peptides to a FASTA file:
+When the -o argument is provided (-o output.fasta), the program writes all candidate aberrant peptides to a FASTA file:
+
 
 >aberrant_peptide_1
 SGWPKLV
@@ -121,6 +122,8 @@ SGWPKLV
 AFGTRVL
 
 This FASTA file can be used as a custom peptide database for downstream proteomics and immunopeptidomics analyses, including database searches against mass spectrometry datasets.
+
+
 ---
 
 ## Installation
