@@ -47,7 +47,7 @@ The program expects:
 
 ### 1. FASTA sequence
 
-A nucleotide FASTA file corresponding to one of the 13 mitochondrial protein-coding genes (or all of them. Mice or Human).
+A nucleotide FASTA file corresponding to mitochondrial protein-coding genes. Mitochondrial sequences are required because mitochondria use a distinct genetic code that differs from the standard cytoplasmic genetic code.
 
 Example:
 
@@ -70,8 +70,6 @@ When the simulated ribosome encounters this codon, a frameshift event can be int
 
 - Frameshift direction (+1 or -1)
 - Number of allowed frameshifts
-- Translation position
-- Frameshift probability
 - Output peptide length threshold
 
 ---
