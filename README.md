@@ -179,8 +179,6 @@ MitoAberrantPeptidePredictor/
 ├── mt_codon_table.py        # Human mitochondrial genetic code
 ├── test_translation.py      # Unit tests
 ├── requirements.txt
-├── example_data/
-│   └── MT-ND1.fasta
 └── README.md
 ```
 
