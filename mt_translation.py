@@ -1,7 +1,5 @@
-#!/usr/bin/env python3
 
 import argparse
-import random
 from mt_codon_table import CODON_TABLE
 
 
@@ -72,12 +70,8 @@ def translate_with_frameshift(
     trigger_codon,
     shift,
     max_frameshifts=1,
-    probability=1.0,
-    seed=None,
     stop_at_stop=False
 ):
-    if seed is not None:
-        random.seed(seed)
 
     peptide = []
     events = []
@@ -97,7 +91,6 @@ def translate_with_frameshift(
         if (
             codon == trigger_codon
             and frameshift_count < max_frameshifts
-            and random.random() <= probability
         ):
             events.append({
                 "position": i + 1,
@@ -158,8 +151,6 @@ def run_analysis(args):
             trigger_codon=trigger_codon,
             shift=args.shift,
             max_frameshifts=args.max_frameshifts,
-            probability=args.probability,
-            seed=args.seed,
             stop_at_stop=args.stop_at_stop
         )
 
@@ -235,12 +226,6 @@ def main():
         help="Maximum number of frameshift events allowed. Default: 1."
     )
 
-    parser.add_argument(
-        "--probability",
-        type=float,
-        default=1.0,
-        help="Probability of frameshift when trigger codon is found. Default: 1.0."
-    )
 
     parser.add_argument(
         "--min-length",
@@ -262,12 +247,6 @@ def main():
         help="Stop translation when mitochondrial stop codon is reached."
     )
 
-    parser.add_argument(
-        "--seed",
-        type=int,
-        default=None,
-        help="Random seed for reproducible probability-based frameshifts."
-    )
 
     parser.add_argument(
         "-o", "--output",
