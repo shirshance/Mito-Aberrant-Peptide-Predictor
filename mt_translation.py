@@ -1,4 +1,3 @@
-
 import argparse
 from mt_codon_table import CODON_TABLE
 
