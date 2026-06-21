@@ -10,10 +10,6 @@ This tool simulates user-defined frameshift events during mitochondrial translat
 
 One potential application is the identification of aberrant peptide products that may be presented on the cell surface by MHC molecules and could represent candidates for immune recognition.
 
-## Biological Background
-
-Transfer RNA (tRNA) modifications are important for accurate codon recognition and translation fidelity. Disruption of these processes may alter translation dynamics and generate non-canonical protein products.
-
 MitoAberrantPeptidePredictor provides a simple framework for exploring how frameshift events could affect mitochondrial translation and produce alternative peptide sequences that may be relevant for downstream proteomics and immunopeptidomics analyses.
 
 ## Project Goal
