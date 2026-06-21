@@ -68,7 +68,7 @@ Input mitochondrial FASTA file.
 Example:
 
 ```bash
--f MT-ND1.fasta
+-f human_mt_COX1.fasta
 ```
 
 #### `-c`, `--codon`
