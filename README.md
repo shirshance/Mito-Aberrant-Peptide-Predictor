@@ -2,63 +2,51 @@
 
 ## Overview
 
-MitoAberrantPeptidePredictor is an in silico mitochondrial translation simulator designed to model abnormal translation events occurring during mitochondrial protein synthesis.
+MitoAberrantPeptidePredictor is an in silico mitochondrial translation simulator designed to model how ribosomal frameshift events may alter mitochondrial protein translation.
 
-Mitochondria contain their own translation machinery, including a specialized set of mitochondrial transfer RNAs (mt-tRNAs) and a distinct genetic code used to translate the 13 mitochondrially encoded proteins.
+Mitochondria possess their own genetic code and translation machinery. Changes in translation fidelity, codon decoding, or ribosome behavior may generate peptide products that differ from canonical mitochondrial proteins.
 
-Transfer RNA (tRNA) modifications are critical for accurate codon decoding and translation fidelity. Alterations in these processes may affect ribosome behavior and potentially generate unexpected translation products.
+This tool simulates user-defined frameshift events during mitochondrial translation and identifies peptide sequences that are generated exclusively after the simulated translation alteration.
 
-This tool predicts how mitochondrial translation outcomes may change when specific codons trigger simulated ribosomal frameshift events, generating alternative peptide products that may not exist under normal conditions.
+## Biological Background
 
----
+Transfer RNA (tRNA) modifications are important for accurate codon recognition and translation fidelity. Disruption of these processes may alter translation dynamics and generate non-canonical protein products.
 
-## Biological Motivation
-
-Transfer RNA (tRNA) modifications play an important role in maintaining translation fidelity and proper decoding of codons.
-
-These modifications can influence translation efficiency, ribosome movement, codon recognition, and overall protein synthesis. Disruption of translation-associated pathways has been associated with altered translation dynamics and generation of unexpected translation products.
-
-Abnormal translation events, including altered decoding and frameshifting, may generate peptide sequences that differ from canonical proteins.
-
-Such peptide products are of interest because they may:
-
-- Alter protein synthesis
-- Affect cellular function
-- Generate non-canonical peptide products
-- Contribute to peptide diversity detected in immunopeptidomics studies
-
-Understanding how changes in translation behavior influence peptide generation remains an active area of research.
-
----
+MitoAberrantPeptidePredictor provides a simple framework for exploring how frameshift events could affect mitochondrial translation and produce alternative peptide sequences that may be relevant for downstream proteomics and immunopeptidomics analyses.
 
 ## Project Goal
 
-The purpose of this project is to simulate mitochondrial translation and artificially introduce frameshift events at user-defined codons.
+The software compares:
 
-The software compares standard translation with altered translation conditions and identifies peptide regions generated exclusively after simulated translation disruptions.
+* Standard mitochondrial translation
+* Translation containing simulated frameshift events
 
-Initially, the project focuses on mitochondrial coding sequences and provides a flexible framework for testing different translation scenarios.
+and identifies peptide fragments that are present only in the altered translation.
+
+These predicted peptides can be exported as a FASTA database for downstream mass spectrometry searches.
 
 ---
 
 ## Input
 
-The program expects:
+The program requires:
 
-### 1. FASTA sequence
+### 1. Mitochondrial FASTA sequence
 
-A nucleotide FASTA file corresponding to mitochondrial protein-coding genes. Mitochondrial sequences are required because mitochondria use a distinct genetic code that differs from the standard cytoplasmic genetic code.
+A nucleotide FASTA file containing one or more mitochondrial protein-coding sequences.
 
 Example:
 
-```fasta
+```text
 >Mitochondrial_gene
 ATGATATGATTTGCTGCTGCTGCTGCTTAA
 ```
 
 ### 2. Trigger codon
 
-A codon specified by the user:
+A codon specified by the user that triggers a simulated frameshift event.
+
+Example:
 
 ```text
 TCT
@@ -66,11 +54,105 @@ TCT
 
 When the simulated ribosome encounters this codon, a frameshift event can be introduced.
 
-### Optional parameters
 
-- Frameshift direction (+1 or -1)
-- Number of allowed frameshifts
-- Output peptide length threshold
+---
+
+## Command-Line Options
+
+### Required Arguments
+
+#### `-f`, `--fasta`
+
+Input mitochondrial FASTA file.
+
+Example:
+
+```bash
+-f MT-ND1.fasta
+```
+
+#### `-c`, `--codon`
+
+Trigger codon that causes a simulated frameshift event.
+
+Example:
+
+```bash
+-c TCT
+```
+
+---
+
+### Optional Arguments
+
+#### `-shift`, `--shift`
+
+Frameshift direction.
+
+Options:
+
+* `1` = +1 frameshift
+* `-1` = -1 frameshift
+
+Default:
+
+```bash
+-shift 1
+```
+
+---
+
+#### `--max-frameshifts`
+
+Maximum number of frameshift events allowed within a sequence.
+
+Default:
+
+```bash
+--max-frameshifts 1
+```
+
+---
+
+#### `--min-length`
+
+Minimum candidate peptide length.
+
+Default:
+
+```bash
+--min-length 8
+```
+
+---
+
+#### `--max-length`
+
+Maximum candidate peptide length.
+
+Default:
+
+```bash
+--max-length 11
+```
+
+---
+
+#### `-o`, `--output`
+
+Output FASTA file containing predicted aberrant peptides.
+
+Default:
+
+```bash
+aberrant_peptides.fasta
+```
+
+Example:
+
+```bash
+-o custom_database.fasta
+```
 
 ---
 
@@ -78,60 +160,81 @@ When the simulated ribosome encounters this codon, a frameshift event can be int
 
 The tool generates:
 
-### Wild-type translation
+### Wild-Type Translation
+
+Example:
 
 ```text
 KKKKWFKFGPF
-
 ```
 
-### Altered translation
+### Altered Translation
+
+Example:
 
 ```text
-KKKKDLNLGP
+KKKKWLNLGP
 ```
 
-### Frameshift report
+### Frameshift Report
+
+Example:
 
 ```text
 Frameshift event detected
 
-Position: 21
-Codon: TCT
+Position: 13
+Codon: TGA
 Shift: +1
 ```
 
-### Candidate aberrant peptides
+### Candidate Aberrant Peptides
 
-Peptide sequences generated only after altered translation:
+Candidate aberrant peptides are peptide fragments generated from the altered translation that are absent from the corresponding wild-type translation.
 
-```text
-SGWPKLV
-AFGTRVL
-```
-
-Candidate aberrant peptides are defined as peptide fragments generated from the altered translation that are absent from the corresponding wild-type translation, within the user-specified peptide length range (default: 8–11 amino acids).
-
-### Optional FASTA output
-
-When the -o argument is provided (-o output.fasta), the program writes all candidate aberrant peptides to a FASTA file:
+Example:
 
 ```text
->aberrant_peptide_1
-SGWPKLV
-
->aberrant_peptide_2
-AFGTRVL
+KKKKWLNL
+KKKKWLNLG
+KKKKWLNLGP
+KKKWLNLG
+KKKWLNLGP
+KKWLNLGP
 ```
 
-This FASTA file can be used as a custom peptide database for downstream proteomics and immunopeptidomics analyses, including database searches against mass spectrometry datasets.
+Peptide lengths are controlled using:
 
+```bash
+--min-length
+--max-length
+```
+
+---
+
+## FASTA Output
+
+All candidate aberrant peptides are automatically written to a FASTA file.
+
+Example:
+
+```text
+>MT-CO1|aberrant_peptide_1
+KKKKWLNL
+
+>MT-CO1|aberrant_peptide_2
+KKKWLNLG
+```
+
+If identical peptide sequences are generated from multiple genes, they are stored only once and their FASTA header contains all contributing gene names.
+
+The resulting FASTA file can be used as a custom peptide database for downstream proteomics and immunopeptidomics analyses.
 
 ---
 
 ## Installation
 
-Clone repository:
+Clone the repository:
 
 ```bash
 git clone https://github.com/shirshance/MitoAberrantPeptidePredictor.git
@@ -151,23 +254,23 @@ pip install -r requirements.txt
 
 ---
 
-## Running the program
+## Running the Program
 
 Example:
 
 ```bash
 python mt_translation.py \
--f MT-ND1.fasta \
--c TCT \
--shift +1
+-f human_mt_COX1.fasta \
+-c TGA \
+-shift 1
 ```
 
 ---
 
-## Running tests
+## Running Tests
 
 ```bash
-pytest
+py -m pytest
 ```
 
 For convenience, the repository also includes an example FASTA file containing the human mitochondrial COX1 (MT-CO1) coding sequence, which can be used to test and explore the software without providing a custom input sequence. (source: https://www.ncbi.nlm.nih.gov/nuccore/251831106)
@@ -182,17 +285,17 @@ MitoAberrantPeptidePredictor/
 ├── mt_translation.py        # Main program workflow
 ├── mt_codon_table.py        # Human mitochondrial genetic code
 ├── test_translation.py      # Unit tests
-├── human_mt_COX1.fasta      #  COX1 (MT-CO1) coding sequence
+├── human_mt_COX1.fasta      # Human mitochondrial COX1 coding sequence
 ├── requirements.txt
 └── README.md
 ```
 
 ---
 
-
-
 ## Course Information
 
-This project was developed as part of a Python programming course project https://github.com/Code-Maven/wis-python-course-2026-03
+This project was developed as part of the Python Programming Course:
 
-The project combines computational biology and simulation approaches to investigate how altered translation behavior may affect protein products and generate novel peptide sequences.
+https://github.com/Code-Maven/wis-python-course-2026-03
+
+The project combines computational biology and simulation approaches to investigate how altered mitochondrial translation behavior may generate non-canonical peptide products.
