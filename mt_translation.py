@@ -124,10 +124,10 @@ def find_aberrant_peptides(wild_type, altered, min_length=8, max_length=11):
     return sorted(altered_peptides - wt_peptides)
 
 
-def write_fasta(peptides, output_path):
+def write_fasta(peptides, output_path, gene_name):
     with open(output_path, "w") as out:
         for index, peptide in enumerate(peptides, start=1):
-            out.write(f">aberrant_peptide_{index}\n")
+            out.write(f">{gene_name}|aberrant_peptide_{index}\n")
             out.write(f"{peptide}\n")
 
 
@@ -187,9 +187,8 @@ def run_analysis(args):
         else:
             print("No unique altered peptides found.")
 
-        if args.output:
-            write_fasta(aberrant_peptides, args.output)
-            print(f"\nAberrant peptides written to: {args.output}")
+        write_fasta(aberrant_peptides, args.output, name)
+        print(f"\nAberrant peptides written to: {args.output}")
 
 
 def main():
@@ -244,8 +243,8 @@ def main():
 
     parser.add_argument(
         "-o", "--output",
-        default=None,
-        help="Optional output FASTA file for aberrant peptides."
+        default="aberrant_peptides.fasta",
+        help="Output FASTA file. Default: aberrant_peptides.fasta"
     )
 
     args = parser.parse_args()
