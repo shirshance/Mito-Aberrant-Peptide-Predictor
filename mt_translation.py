@@ -124,12 +124,12 @@ def find_aberrant_peptides(wild_type, altered, min_length=8, max_length=11):
     return sorted(altered_peptides - wt_peptides)
 
 
-def write_fasta(peptides, output_path, gene_name):
+def write_fasta(peptide_records, output_path):
     with open(output_path, "w") as out:
-        for index, peptide in enumerate(peptides, start=1):
+        for index, record in enumerate(peptide_records, start=1):
+            gene_name, peptide = record
             out.write(f">{gene_name}|aberrant_peptide_{index}\n")
             out.write(f"{peptide}\n")
-
 
 def run_analysis(args):
     trigger_codon = validate_codon(args.codon)
@@ -138,6 +138,7 @@ def run_analysis(args):
         raise ValueError("Frameshift must be +1 or -1.")
 
     sequences = read_fasta(args.fasta)
+    all_aberrant_peptides = []
 
     for name, seq in sequences.items():
         validate_dna_sequence(seq)
@@ -187,8 +188,11 @@ def run_analysis(args):
         else:
             print("No unique altered peptides found.")
 
-        write_fasta(aberrant_peptides, args.output, name)
-        print(f"\nAberrant peptides written to: {args.output}")
+        for peptide in aberrant_peptides:
+            all_aberrant_peptides.append((name, peptide))
+            
+    write_fasta(all_aberrant_peptides, args.output)
+    print(f"\nAberrant peptides written to: {args.output}")
 
 
 def main():
