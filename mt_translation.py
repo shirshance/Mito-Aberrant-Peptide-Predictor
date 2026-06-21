@@ -1,4 +1,5 @@
 import argparse
+from collections import defaultdict
 from mt_codon_table import CODON_TABLE
 
 
@@ -191,7 +192,14 @@ def run_analysis(args):
         for peptide in aberrant_peptides:
             all_aberrant_peptides.append((name, peptide))
             
-    write_fasta(all_aberrant_peptides, args.output)
+    unique_records = defaultdict(set)
+    for gene, peptide in all_aberrant_peptides:
+        unique_records[peptide].add(gene)
+    write_fasta(
+        [( ";".join(sorted(genes)), peptide )
+         for peptide, genes in unique_records.items()],
+        args.output
+    )
     print(f"\nAberrant peptides written to: {args.output}")
 
 
