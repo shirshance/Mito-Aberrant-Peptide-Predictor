@@ -49,14 +49,14 @@ def validate_codon(codon):
     return codon
 
 
-def translate_standard(seq, stop_at_stop=False):
+def translate_standard(seq):
     peptide = []
 
     for i in range(0, len(seq) - 2, 3):
         codon = seq[i:i + 3]
         aa = CODON_TABLE.get(codon, "X")
 
-        if aa == "_" and stop_at_stop:
+        if aa == "_":
             break
 
         peptide.append(aa)
@@ -69,7 +69,6 @@ def translate_with_frameshift(
     trigger_codon,
     shift,
     max_frameshifts=1,
-    stop_at_stop=False
 ):
 
     peptide = []
@@ -82,7 +81,7 @@ def translate_with_frameshift(
         codon = seq[i:i + 3]
         aa = CODON_TABLE.get(codon, "X")
 
-        if aa == "_" and stop_at_stop:
+        if aa == "_":
             break
 
         peptide.append(aa)
@@ -143,14 +142,14 @@ def run_analysis(args):
     for name, seq in sequences.items():
         validate_dna_sequence(seq)
 
-        wild_type = translate_standard(seq, stop_at_stop=args.stop_at_stop)
+        wild_type = translate_standard(seq)
 
         altered, events = translate_with_frameshift(
             seq=seq,
             trigger_codon=trigger_codon,
             shift=args.shift,
             max_frameshifts=args.max_frameshifts,
-            stop_at_stop=args.stop_at_stop
+        
         )
 
         aberrant_peptides = find_aberrant_peptides(
@@ -240,11 +239,7 @@ def main():
         help="Maximum candidate peptide length. Default: 11."
     )
 
-    parser.add_argument(
-        "--stop-at-stop",
-        action="store_true",
-        help="Stop translation when mitochondrial stop codon is reached."
-    )
+   
 
 
     parser.add_argument(
