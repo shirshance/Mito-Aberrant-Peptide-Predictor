@@ -7,6 +7,7 @@ MitoAberrantPeptidePredictor is an in silico mitochondrial translation simulator
 Mitochondria possess their own genetic code and translation machinery. Changes in translation fidelity, codon decoding, or ribosome behavior may generate peptide products that differ from canonical mitochondrial proteins.
 
 This tool simulates user-defined frameshift events during mitochondrial translation and identifies peptide sequences that are generated exclusively after the simulated translation alteration.
+
 One potential application is the identification of aberrant peptide products that may be presented on the cell surface by MHC molecules and could represent candidates for immune recognition.
 
 ## Biological Background
