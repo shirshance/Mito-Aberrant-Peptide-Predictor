@@ -110,6 +110,8 @@ SGWPKLV
 AFGTRVL
 ```
 
+Candidate aberrant peptides are defined as peptide fragments generated from the altered translation that are absent from the corresponding wild-type translation, within the user-specified peptide length range (default: 8–11 amino acids).
+
 ### Optional FASTA output
 
 When the -o argument is provided (-o output.fasta), the program writes all candidate aberrant peptides to a FASTA file:
@@ -168,6 +170,8 @@ python mt_translation.py \
 pytest
 ```
 
+For convenience, the repository also includes an example FASTA file containing the human mitochondrial COX1 (MT-CO1) coding sequence, which can be used to test and explore the software without providing a custom input sequence. (source: https://www.ncbi.nlm.nih.gov/nuccore/251831106)
+
 ---
 
 ## Repository Structure
@@ -178,6 +182,7 @@ MitoAberrantPeptidePredictor/
 ├── mt_translation.py        # Main program workflow
 ├── mt_codon_table.py        # Human mitochondrial genetic code
 ├── test_translation.py      # Unit tests
+├── human_mt_COX1.fasta      #  COX1 (MT-CO1) coding sequence
 ├── requirements.txt
 └── README.md
 ```
