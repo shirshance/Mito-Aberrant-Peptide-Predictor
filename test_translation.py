@@ -2,7 +2,8 @@ from mt_translation import (
     translate_standard,
     translate_with_frameshift,
     find_aberrant_peptides,
-    validate_codon
+    validate_codon,
+    write_fasta
 )
 
 
@@ -12,15 +13,9 @@ def test_mitochondrial_translation():
     assert peptide == "MMWF"
 
 
-def test_stop_codons_without_stopping():
+def test_translation_stops_at_stop_codon():
     seq = "ATGTAAATG"
-    peptide = translate_standard(seq, stop_at_stop=False)
-    assert peptide == "M_M"
-
-
-def test_stop_codons_with_stopping():
-    seq = "ATGTAAATG"
-    peptide = translate_standard(seq, stop_at_stop=True)
+    peptide = translate_standard(seq)
     assert peptide == "M"
 
 
@@ -54,3 +49,21 @@ def test_aberrant_peptides():
     )
 
     assert "AAAA" in aberrant
+
+
+def test_write_fasta_with_gene_name(tmp_path):
+    output_file = tmp_path / "test_output.fasta"
+
+    peptide_records = [
+        ("MT_TEST", "KKKKWLNL"),
+        ("COX1", "AAAFGGPP")
+    ]
+
+    write_fasta(peptide_records, output_file)
+
+    content = output_file.read_text()
+
+    assert ">MT_TEST|aberrant_peptide_1" in content
+    assert "KKKKWLNL" in content
+    assert ">COX1|aberrant_peptide_2" in content
+    assert "AAAFGGPP" in content
